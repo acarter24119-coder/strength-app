@@ -4,13 +4,15 @@ import type { SetLog } from "./types";
 
 class StrengthDB extends Dexie {
   sets!: Dexie.Table<SetLog, number>;
-  plan!: Dexie.Table<{ id: number; text: string }, number>; // ← Add this line
+  plan!: Dexie.Table<{ id: number; text: string }, number>;
 
   constructor() {
     super("strengthDB");
-    this.version(1).stores({
-      sets: "++id, day, exercise, date",
-      plan: "id", // ← Add this line
+
+    // Version bump — resets DB (Option B)
+    this.version(2).stores({
+      sets: "++id, workout, exercise, type, date",
+      plan: "id"
     });
   }
 }
