@@ -49,7 +49,6 @@ export default function HistoryPage({
 
       acc[curr.exercise].sets += 1;
 
-      // Strength only
       if (curr.type === "strength") {
         acc[curr.exercise].reps += curr.reps || 0;
         acc[curr.exercise].volume += (curr.weight || 0) * (curr.reps || 0);
@@ -92,6 +91,13 @@ export default function HistoryPage({
     if (s.type === "hold") {
       const parts = [];
       if (s.weight) parts.push(`${s.weight} kg`);
+      if (s.time) parts.push(`${s.time} s`);
+      return parts.join(" | ");
+    }
+
+    if (s.type === "cardio") {
+      const parts = [];
+      if (s.distance) parts.push(`${s.distance} km`);
       if (s.time) parts.push(`${s.time} s`);
       return parts.join(" | ");
     }

@@ -12,11 +12,11 @@ body {
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
-  background: #f7f7f9;
-  color: #222;
+  background: #f4f5f7;
+  color: #1c1c1e;
 }
 
-/* Smooth animations everywhere */
+/* Smooth animations */
 .fade-in {
   animation: fadeIn 0.25s ease-out;
 }
@@ -41,6 +41,7 @@ h1 {
   font-size: 28px;
   font-weight: 800;
   margin-bottom: 12px;
+  color: #0f172a; /* Deep slate */
 }
 
 h2 {
@@ -48,6 +49,7 @@ h2 {
   font-weight: 700;
   margin-top: 24px;
   margin-bottom: 10px;
+  color: #1e293b;
 }
 
 h3 {
@@ -55,6 +57,7 @@ h3 {
   font-weight: 700;
   margin-top: 24px;
   margin-bottom: 10px;
+  color: #334155;
 }
 
 /* ------------------------------ */
@@ -65,17 +68,17 @@ input {
   width: 100%;
   padding: 12px 14px;
   margin-bottom: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
   font-size: 16px;
-  background: #fff;
-  transition: border 0.2s ease;
+  background: #ffffff;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 input:focus {
-  border-color: #007aff;
+  border-color: #2563eb; /* Strongman blue */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
   outline: none;
-  background: #fff;
 }
 
 /* ------------------------------ */
@@ -83,13 +86,13 @@ input:focus {
 /* ------------------------------ */
 
 button {
-  padding: 10px 16px;
-  border-radius: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
   border: none;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  background: #007aff;
+  background: #2563eb; /* Strongman blue */
   color: white;
   transition: background 0.2s ease, transform 0.1s ease;
 }
@@ -99,12 +102,12 @@ button:active {
 }
 
 button.secondary {
-  background: #e5e5ea;
-  color: #333;
+  background: #e5e7eb;
+  color: #1f2937;
 }
 
 button.danger {
-  background: #ff3b30;
+  background: #dc2626;
   color: white;
 }
 
@@ -113,9 +116,9 @@ button.danger {
 /* ------------------------------ */
 
 .exercise-item {
-  padding: 10px 0;
+  padding: 12px 0;
   font-size: 16px;
-  border-bottom: 1px solid #e5e5ea;
+  border-bottom: 1px solid #e2e8f0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -123,6 +126,7 @@ button.danger {
 
 .exercise-item span {
   cursor: pointer;
+  font-weight: 500;
 }
 
 /* ------------------------------ */
@@ -131,10 +135,10 @@ button.danger {
 
 .card {
   background: white;
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-bottom: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
   animation: fadeIn 0.25s ease-out;
 }
 
@@ -144,31 +148,32 @@ button.danger {
 
 .exercise-group {
   background: white;
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
 .exercise-group-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 6px;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 12px;
 }
 
 .exercise-group-header-title {
   font-size: 17px;
   font-weight: 700;
+  color: #1e293b;
 }
 
 .set-row {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px dashed #ddd;
+  padding: 10px 0;
+  border-bottom: 1px dashed #cbd5e1;
   font-size: 15px;
 }
 
@@ -178,10 +183,10 @@ button.danger {
 
 /* Delete button inside set row */
 .set-delete-btn {
-  background: #ffebee;
-  border: 1px solid #e57373;
-  color: #c62828;
-  padding: 2px 6px;
+  background: #fee2e2;
+  border: 1px solid #ef4444;
+  color: #b91c1c;
+  padding: 3px 7px;
   border-radius: 6px;
   font-size: 12px;
   cursor: pointer;
@@ -192,12 +197,13 @@ button.danger {
 /* ------------------------------ */
 
 .active-exercise {
-  background: #e8f0ff;
-  border-left: 4px solid #007aff;
-  padding: 10px 12px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  background: #dbeafe;
+  border-left: 5px solid #2563eb;
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 12px;
   animation: fadeIn 0.2s ease-out;
+  font-weight: 600;
 }
 
 /* ------------------------------ */
@@ -206,9 +212,9 @@ button.danger {
 
 .summary-box {
   background: white;
-  padding: 16px;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
   margin-bottom: 20px;
 }
 
@@ -218,10 +224,10 @@ button.danger {
 
 .history-item {
   background: white;
-  padding: 12px 14px;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 /* ------------------------------ */
@@ -230,35 +236,39 @@ button.danger {
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: #1c1c1e;
-    color: #f2f2f7;
+    background: #111827;
+    color: #f3f4f6;
   }
 
   .card,
   .exercise-group,
   .summary-box,
   .history-item {
-    background: #2c2c2e;
+    background: #1f2937;
     box-shadow: none;
   }
 
   input {
-    background: #3a3a3c;
-    border: 1px solid #555;
+    background: #374151;
+    border: 1px solid #4b5563;
     color: white;
   }
 
   button.secondary {
-    background: #3a3a3c;
-    color: #f2f2f7;
+    background: #374151;
+    color: #f3f4f6;
   }
 
   .exercise-item {
-    border-bottom: 1px solid #3a3a3c;
+    border-bottom: 1px solid #374151;
   }
 
   .active-exercise {
-    background: #2d3a55;
-    border-left-color: #0a84ff;
+    background: #1e3a8a;
+    border-left-color: #3b82f6;
+  }
+
+  .set-row {
+    border-bottom: 1px dashed #4b5563;
   }
 }

@@ -1,3 +1,4 @@
+// src/App.tsx
 import { useEffect, useRef, useState } from "react";
 import type { SetLog, WorkoutKey, ExerciseType } from "./types";
 import { saveAs } from "file-saver";
@@ -137,6 +138,14 @@ function AddExerciseModal({
           >
             Hold
           </button>
+
+          <button
+            className={type === "cardio" ? "active-type" : ""}
+            onClick={() => setType("cardio")}
+            style={{ flex: 1 }}
+          >
+            Cardio
+          </button>
         </div>
 
         <div style={{ display: "flex", gap: 8 }}>
@@ -263,6 +272,7 @@ export default function App() {
       ...(customExercises[key]?.map((e) => e.name) || [])
     ]);
     loadHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -357,6 +367,16 @@ export default function App() {
       }
       setReps("");
       setDistance("");
+    } else if (type === "cardio") {
+      if (last) {
+        setDistance(String(last.distance || ""));
+        setTimeSeconds(String(last.time || ""));
+      } else {
+        setDistance("");
+        setTimeSeconds("");
+      }
+      setWeight("");
+      setReps("");
     }
 
     setSetNumber(getTodaySetCountForExercise(name) + 1);
@@ -383,6 +403,11 @@ export default function App() {
       setTimeSeconds(String(last.time || ""));
       setReps("");
       setDistance("");
+    } else if (type === "cardio") {
+      setDistance(String(last.distance || ""));
+      setTimeSeconds(String(last.time || ""));
+      setWeight("");
+      setReps("");
     }
 
     setSetNumber(getTodaySetCountForExercise(exerciseName) + 1);
@@ -407,6 +432,8 @@ export default function App() {
       if (!weight || (!distance && !timeSeconds)) return;
     } else if (type === "hold") {
       if (!weight || !timeSeconds) return;
+    } else if (type === "cardio") {
+      if (!distance || !timeSeconds) return;
     }
 
     const payload: SetLog = {
@@ -421,10 +448,13 @@ export default function App() {
       payload.reps = Number(reps);
     } else if (type === "carry") {
       if (weight) payload.weight = Number(weight);
-      if (distance) payload.distance = Number(distance);
+      if (distance) payload.distance = Number(distance); // metres
       if (timeSeconds) payload.time = Number(timeSeconds);
     } else if (type === "hold") {
       if (weight) payload.weight = Number(weight);
+      if (timeSeconds) payload.time = Number(timeSeconds);
+    } else if (type === "cardio") {
+      if (distance) payload.distance = Number(distance); // kilometres
       if (timeSeconds) payload.time = Number(timeSeconds);
     }
 
@@ -465,7 +495,7 @@ export default function App() {
   };
 
   const exportCSV = () => {
-    const header = "Workout,Exercise,Type,Weight (kg),Reps,Distance (m),Time (s),Date\n";
+    const header = "Workout,Exercise,Type,Weight (kg),Reps,Distance,Time (s),Date\n";
     const rows = history
       .map((s) => {
         return `${s.workout},${s.exercise},${s.type || ""},${s.weight || ""},${
@@ -492,6 +522,17 @@ export default function App() {
       return acc;
     },
     { sets: 0, reps: 0, volume: 0 }
+  );
+
+  const todaysCardioTotals = todaysSets.reduce(
+    (acc, curr) => {
+      if (curr.type === "cardio") {
+        acc.distance += curr.distance || 0;
+        acc.time += curr.time || 0;
+      }
+      return acc;
+    },
+    { distance: 0, time: 0 }
   );
 
   const todaysByExercise = todaysSets.reduce<Record<string, SetLog[]>>(
@@ -614,6 +655,19 @@ export default function App() {
               <strong>Total volume:</strong> {todaysTotals.volume.toFixed(1)} kg
             </div>
           </div>
+
+          {(todaysCardioTotals.distance > 0 || todaysCardioTotals.time > 0) && (
+            <div style={{ marginBottom: 20 }}>
+              <h3>Cardio Today</h3>
+              <div>
+                <strong>Total distance:</strong>{" "}
+                {todaysCardioTotals.distance.toFixed(2)} km
+              </div>
+              <div>
+                <strong>Total time:</strong> {todaysCardioTotals.time} s
+              </div>
+            </div>
+          )}
         </div>
 
         <div
@@ -837,6 +891,16 @@ export default function App() {
                   }
                   setReps("");
                   setDistance("");
+                } else if (type === "cardio") {
+                  if (last) {
+                    setDistance(String(last.distance || ""));
+                    setTimeSeconds(String(last.time || ""));
+                  } else {
+                    setDistance("");
+                    setTimeSeconds("");
+                  }
+                  setWeight("");
+                  setReps("");
                 }
 
                 setSetNumber(getTodaySetCountForExercise(name) + 1);
@@ -874,6 +938,22 @@ export default function App() {
                       placeholder="Weight (kg)"
                       value={weight}
                       onChange={(e) => setWeight(e.target.value)}
+                    />
+                    <input
+                      placeholder="Time (s)"
+                      value={timeSeconds}
+                      onChange={(e) => setTimeSeconds(e.target.value)}
+                    />
+                  </>
+                );
+              }
+              if (type === "cardio") {
+                return (
+                  <>
+                    <input
+                      placeholder="Distance (km)"
+                      value={distance}
+                      onChange={(e) => setDistance(e.target.value)}
                     />
                     <input
                       placeholder="Time (s)"
@@ -1020,6 +1100,11 @@ export default function App() {
                     } else if (type === "hold") {
                       const parts = [];
                       if (s.weight) parts.push(`${s.weight} kg`);
+                      if (s.time) parts.push(`${s.time} s`);
+                      details = parts.join(" | ");
+                    } else if (type === "cardio") {
+                      const parts = [];
+                      if (s.distance) parts.push(`${s.distance} km`);
                       if (s.time) parts.push(`${s.time} s`);
                       details = parts.join(" | ");
                     }
