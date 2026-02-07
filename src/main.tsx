@@ -1,10 +1,8 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+export default function MainPage() {
+  return (
+    <div style={{ padding: "20px", color: "white" }}>
+      <h1>Workout</h1>
+      <p>Your main workout page will go here.</p>
+    </div>
+  );
+}
