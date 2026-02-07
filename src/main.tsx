@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { WorkoutKey, ExerciseType, SetLog } from "./types";
 import { db } from "./db";
+import "./App.css";
 
 export default function MainPage() {
   const [workout, setWorkout] = useState<WorkoutKey>("A");
