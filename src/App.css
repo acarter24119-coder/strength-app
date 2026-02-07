@@ -1,6 +1,30 @@
-/* ------------------------------ */
-/* GLOBAL RESET + BASE STYLING   */
-/* ------------------------------ */
+/* --------------------------------------------------------- */
+/* ROGUE / CERBERUS STRONGMAN THEME                          */
+/* --------------------------------------------------------- */
+
+:root {
+  /* Core palette */
+  --charcoal: #0f0f0f;
+  --steel-dark: #1a1a1a;
+  --steel: #2a2a2a;
+  --steel-light: #3a3a3a;
+
+  --off-white: #f8f9fa;
+  --text-light: #ffffff;
+  --text-muted: #b3b3b3;
+
+  /* Cerberus red */
+  --cerberus-red: #d62828;
+  --cerberus-red-dark: #b71c1c;
+
+  /* Shadows */
+  --shadow-strong: 0 4px 10px rgba(0,0,0,0.45);
+  --shadow-soft: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* --------------------------------------------------------- */
+/* GLOBAL RESET + BASE                                       */
+/* --------------------------------------------------------- */
 
 * {
   box-sizing: border-box;
@@ -10,13 +34,12 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
-  background: #f4f5f7;
-  color: #1c1c1e;
+  background: var(--charcoal);
+  color: var(--text-light);
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
 }
 
-/* Smooth animations */
+/* Smooth fade */
 .fade-in {
   animation: fadeIn 0.25s ease-out;
 }
@@ -26,9 +49,9 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ------------------------------ */
-/* CONTAINER + HEADERS            */
-/* ------------------------------ */
+/* --------------------------------------------------------- */
+/* CONTAINER + HEADERS                                       */
+/* --------------------------------------------------------- */
 
 .container {
   max-width: 480px;
@@ -37,64 +60,73 @@ body {
   padding-bottom: 140px;
 }
 
-h1 {
-  font-size: 28px;
+h1, h2, h3 {
+  margin: 0 0 12px 0;
   font-weight: 800;
-  margin-bottom: 12px;
-  color: #0f172a; /* Deep slate */
+  color: var(--off-white);
 }
 
-h2 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-top: 24px;
-  margin-bottom: 10px;
-  color: #1e293b;
+h1 { font-size: 28px; }
+h2 { font-size: 20px; }
+h3 { font-size: 18px; }
+
+/* Rogue-style header bar */
+.header {
+  background: var(--steel-dark);
+  padding: 16px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-light);
+  border-bottom: 2px solid var(--cerberus-red);
+  box-shadow: var(--shadow-soft);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-top: 24px;
-  margin-bottom: 10px;
-  color: #334155;
-}
-
-/* ------------------------------ */
-/* INPUTS                         */
-/* ------------------------------ */
+/* --------------------------------------------------------- */
+/* INPUTS                                                    */
+/* --------------------------------------------------------- */
 
 input {
   width: 100%;
   padding: 12px 14px;
-  margin-bottom: 10px;
-  border-radius: 12px;
-  border: 1px solid #d1d5db;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: var(--steel-dark);
+  color: var(--text-light);
   font-size: 16px;
-  background: #ffffff;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 input:focus {
-  border-color: #2563eb; /* Strongman blue */
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  border-color: var(--cerberus-red);
+  box-shadow: 0 0 0 3px rgba(214, 40, 40, 0.3);
   outline: none;
 }
 
-/* ------------------------------ */
-/* BUTTONS                        */
-/* ------------------------------ */
+/* --------------------------------------------------------- */
+/* BUTTONS                                                   */
+/* --------------------------------------------------------- */
 
 button {
   padding: 12px 16px;
-  border-radius: 12px;
+  border-radius: 10px;
   border: none;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  background: #2563eb; /* Strongman blue */
-  color: white;
-  transition: background 0.2s ease, transform 0.1s ease;
+  background: var(--cerberus-red);
+  color: var(--text-light);
+  width: 100%;
+  box-shadow: var(--shadow-strong);
+  transition: 0.15s ease;
+}
+
+button:hover {
+  background: var(--cerberus-red-dark);
+  transform: translateY(-1px);
 }
 
 button:active {
@@ -102,23 +134,39 @@ button:active {
 }
 
 button.secondary {
-  background: #e5e7eb;
-  color: #1f2937;
+  background: var(--steel-dark);
+  color: var(--text-light);
+  border: 1px solid #333;
 }
 
 button.danger {
-  background: #dc2626;
-  color: white;
+  background: #8b0000;
 }
 
-/* ------------------------------ */
-/* EXERCISE LIST                  */
-/* ------------------------------ */
+/* --------------------------------------------------------- */
+/* CARD / PANEL STYLING                                      */
+/* --------------------------------------------------------- */
+
+.card,
+.exercise-group,
+.summary-box,
+.history-item {
+  background: var(--steel);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid #333;
+}
+
+/* --------------------------------------------------------- */
+/* EXERCISE LIST + SET ROWS                                  */
+/* --------------------------------------------------------- */
 
 .exercise-item {
   padding: 12px 0;
   font-size: 16px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--steel-light);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -126,32 +174,8 @@ button.danger {
 
 .exercise-item span {
   cursor: pointer;
-  font-weight: 500;
-}
-
-/* ------------------------------ */
-/* CARD STYLING (PREMIUM LOOK)    */
-/* ------------------------------ */
-
-.card {
-  background: white;
-  border-radius: 16px;
-  padding: 16px 18px;
-  margin-bottom: 16px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-  animation: fadeIn 0.25s ease-out;
-}
-
-/* ------------------------------ */
-/* TODAY'S SETS GROUPING          */
-/* ------------------------------ */
-
-.exercise-group {
-  background: white;
-  border-radius: 16px;
-  padding: 16px 18px;
-  margin-bottom: 18px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  font-weight: 600;
+  color: var(--off-white);
 }
 
 .exercise-group-header {
@@ -159,46 +183,46 @@ button.danger {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 8px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--steel-light);
   margin-bottom: 12px;
 }
 
 .exercise-group-header-title {
   font-size: 17px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--off-white);
 }
 
 .set-row {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  border-bottom: 1px dashed #cbd5e1;
+  border-bottom: 1px dashed var(--steel-light);
   font-size: 15px;
+  color: var(--text-light);
 }
 
 .set-row:last-child {
   border-bottom: none;
 }
 
-/* Delete button inside set row */
 .set-delete-btn {
-  background: #fee2e2;
-  border: 1px solid #ef4444;
-  color: #b91c1c;
+  background: #5a0000;
+  border: 1px solid #8b0000;
+  color: #ffb3b3;
   padding: 3px 7px;
   border-radius: 6px;
   font-size: 12px;
   cursor: pointer;
 }
 
-/* ------------------------------ */
-/* ACTIVE EXERCISE HIGHLIGHT      */
-/* ------------------------------ */
+/* --------------------------------------------------------- */
+/* ACTIVE EXERCISE HIGHLIGHT                                 */
+/* --------------------------------------------------------- */
 
 .active-exercise {
-  background: #dbeafe;
-  border-left: 5px solid #2563eb;
+  background: #3a0000;
+  border-left: 5px solid var(--cerberus-red);
   padding: 12px 14px;
   border-radius: 12px;
   margin-bottom: 12px;
@@ -206,69 +230,42 @@ button.danger {
   font-weight: 600;
 }
 
-/* ------------------------------ */
-/* SUMMARY SCREEN                 */
-/* ------------------------------ */
+/* --------------------------------------------------------- */
+/* BOTTOM NAVIGATION BAR                                     */
+/* --------------------------------------------------------- */
 
-.summary-box {
-  background: white;
-  padding: 18px;
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-  margin-bottom: 20px;
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--steel-dark);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #333;
+  box-shadow: var(--shadow-strong);
+  z-index: 20;
 }
 
-/* ------------------------------ */
-/* HISTORY PAGE                   */
-/* ------------------------------ */
-
-.history-item {
-  background: white;
-  padding: 14px 16px;
-  border-radius: 14px;
-  margin-bottom: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+.nav-item {
+  color: var(--text-muted);
+  font-size: 12px;
+  text-align: center;
 }
 
-/* ------------------------------ */
-/* DARK MODE SUPPORT              */
-/* ------------------------------ */
+.nav-item.active {
+  color: var(--cerberus-red);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------- */
+/* DARK MODE OVERRIDE (optional)                             */
+/* --------------------------------------------------------- */
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: #111827;
-    color: #f3f4f6;
-  }
-
-  .card,
-  .exercise-group,
-  .summary-box,
-  .history-item {
-    background: #1f2937;
-    box-shadow: none;
-  }
-
-  input {
-    background: #374151;
-    border: 1px solid #4b5563;
-    color: white;
-  }
-
-  button.secondary {
-    background: #374151;
-    color: #f3f4f6;
-  }
-
-  .exercise-item {
-    border-bottom: 1px solid #374151;
-  }
-
-  .active-exercise {
-    background: #1e3a8a;
-    border-left-color: #3b82f6;
-  }
-
-  .set-row {
-    border-bottom: 1px dashed #4b5563;
+    background: var(--charcoal);
+    color: var(--text-light);
   }
 }
