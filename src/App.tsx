@@ -193,6 +193,16 @@ function StatsPage({ history, onBack }: { history: SetLog[]; onBack: () => void 
 
   return (
     <div className="container">
+
+      {/* BACK BUTTON */}
+      <button
+        className="secondary"
+        style={{ marginBottom: 20 }}
+        onClick={onBack}
+      >
+        ← Back
+      </button>
+
       <div
         style={{
           position: "sticky",
