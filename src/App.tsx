@@ -162,7 +162,7 @@ function AddExerciseModal({
 /* ---------------------------------------------------------
    STATS PAGE
 --------------------------------------------------------- */
-function StatsPage({ history, onBack }: { history: SetLog[]; onBack: () => void }) {
+function StatsPage({ history,  }: { history: SetLog[]; onBack: () => void }) {
   const today = new Date();
   const sevenDaysAgo = new Date();
   sevenDaysAgo.setDate(today.getDate() - 6);
