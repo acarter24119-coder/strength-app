@@ -1,6 +1,6 @@
 export type WorkoutKey = "A" | "B" | "C" | "D" | "E";
 
-export type ExerciseType = 
+export type ExerciseType =
   | "strength"
   | "carry"
   | "hold"
@@ -10,18 +10,16 @@ export type SetLog = {
   id?: number;
 
   workout: WorkoutKey;
-  exercise: string;
+  exercise: string;        // e.g. "Log Press", "Farmers", "Yoke"
   type: ExerciseType;
 
   // Strength fields
-  weight?: number;
+  weight?: number;         // kg
   reps?: number;
 
   // Carry fields (strongman)
-  // Distance in metres
-  distance?: number;
-  // Time in seconds
-  time?: number;
+  distance?: number;       // metres
+  time?: number;           // seconds (also used for hold + cardio)
 
   // Hold fields
   // (uses weight + time)
@@ -33,5 +31,5 @@ export type SetLog = {
 
   notes?: string;
 
-  date: string; // ISO timestamp
+  date: string;            // ISO timestamp
 };
