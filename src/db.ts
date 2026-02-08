@@ -10,6 +10,7 @@ class StrengthDB extends Dexie {
 
   constructor() {
     super("strengthDB");
+    console.log("Dexie constructor running");
 
     this.version(7).stores({
       sets: "++id, workout, exercise, type, date, workoutId",
