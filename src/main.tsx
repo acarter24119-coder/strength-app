@@ -1,3 +1,4 @@
+import "./db";
 import ReactDOM from "react-dom/client";
 import "./App.css";
 import "./index.css";
