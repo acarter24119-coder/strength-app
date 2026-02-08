@@ -11,7 +11,7 @@ class StrengthDB extends Dexie {
     super("strengthDB");
 
     this.version(5).stores({
-      sets: "++id, exercise, date",
+      sets: "++id, workout, exercise, type, date",
       workouts: "++id, date",
       plans: "workout"
     });
