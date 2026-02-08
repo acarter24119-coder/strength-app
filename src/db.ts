@@ -10,10 +10,10 @@ class StrengthDB extends Dexie {
   constructor() {
     super("strengthDB");
 
-    this.version(4).stores({
-      sets: "++id, workout, exercise, type, date, workoutId",
+    this.version(5).stores({
+      sets: "++id, exercise, date",
       workouts: "++id, date",
-      plans: "workout" // KEYED BY WORKOUT LETTER A–E
+      plans: "workout"
     });
   }
 }
