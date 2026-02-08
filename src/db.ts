@@ -20,3 +20,7 @@ class StrengthDB extends Dexie {
 }
 
 export const db = new StrengthDB();
+
+db.open().catch(err => {
+  console.error("Failed to open DB:", err);
+});
