@@ -1,6 +1,7 @@
-// db.ts
 import Dexie from "dexie";
 import type { SetLog, WorkoutKey } from "./types";
+
+console.log("Dexie DB file loaded");
 
 class StrengthDB extends Dexie {
   sets!: Dexie.Table<SetLog, number>;
@@ -10,7 +11,7 @@ class StrengthDB extends Dexie {
   constructor() {
     super("strengthDB");
 
-    this.version(5).stores({
+    this.version(6).stores({
       sets: "++id, workout, exercise, type, date, workoutId",
       workouts: "++id, date",
       plans: "workout"
