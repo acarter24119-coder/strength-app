@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import type { WorkoutKey, ExerciseType, SetLog } from "./types";
 import { db } from "./db";
 import "./App.css";
+import RestTimer from "./RestTimer";
 
 export default function MainPage() {
   const [workout, setWorkout] = useState<WorkoutKey>("A");
@@ -18,6 +19,9 @@ export default function MainPage() {
 
   // Notes
   const [notes, setNotes] = useState("");
+
+  // Keep focus on exercise field
+  const exerciseRef = useRef<HTMLInputElement>(null);
 
   const addSet = async () => {
     const newSet: SetLog = {
@@ -47,17 +51,42 @@ export default function MainPage() {
 
     await db.sets.add(newSet);
 
-    // Clear fields
+    // Auto‑carryover: keep previous values
+    setNotes("");
+
+    // Keep cursor ready for next set
+    exerciseRef.current?.focus();
+  };
+
+  // ⭐ NEW — Finish Workout
+  const finishWorkout = async () => {
+    // 1. Create workout entry
+    const workoutId = await db.workouts.add({
+      date: new Date().toISOString()
+    });
+
+    // 2. Attach workoutId to all sets from this workout key
+    await db.sets
+      .where("workout")
+      .equals(workout)
+      .modify({ workoutId });
+
+    // 3. Clear UI for next session
+    setExercise("");
+    setType("strength");
     setWeight("");
     setReps("");
     setDistance("");
     setTime("");
     setNotes("");
+
+    // 4. Focus ready for next workout
+    exerciseRef.current?.focus();
   };
 
   return (
     <div style={{ padding: "20px", color: "white" }}>
-      <h1>Workout Logger</h1>
+      <h1 className="app-header">STRENGTH TRAINING</h1>
 
       <label>Workout Key</label>
       <select
@@ -73,6 +102,7 @@ export default function MainPage() {
 
       <label>Exercise Name</label>
       <input
+        ref={exerciseRef}
         value={exercise}
         onChange={e => setExercise(e.target.value)}
         placeholder="e.g. Log Press"
@@ -164,7 +194,17 @@ export default function MainPage() {
         placeholder="Optional notes"
       />
 
-      <button onClick={addSet}>Add Set</button>
+      <button className="add-set-btn" onClick={addSet}>Add Set</button>
+
+      <button className="finish-btn" onClick={finishWorkout}>
+        Finish Workout
+      </button>
+
+      <button className="history-btn" onClick={() => window.location.href = "/history"}>
+        History
+      </button>
+
+      <RestTimer />
     </div>
   );
 }

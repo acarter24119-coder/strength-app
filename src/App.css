@@ -85,6 +85,15 @@ h3 { font-size: 18px; }
   z-index: 10;
 }
 
+/* Custom header for main title */
+.app-header {
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  color: var(--cerberus-red);
+}
+
 /* --------------------------------------------------------- */
 /* INPUTS                                                    */
 /* --------------------------------------------------------- */
@@ -259,6 +268,21 @@ button.danger {
   font-weight: 700;
 }
 
+/* Custom Add Set button */
+.add-set-btn {
+  background: var(--cerberus-red);
+  color: var(--off-white);
+  font-weight: 700;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-set-btn:hover {
+  opacity: 0.85;
+}
+
 /* --------------------------------------------------------- */
 /* DARK MODE OVERRIDE (optional)                             */
 /* --------------------------------------------------------- */
@@ -268,4 +292,28 @@ button.danger {
     background: var(--charcoal);
     color: var(--text-light);
   }
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--charcoal);
+    color: var(--text-light);
+  }
+}
+
+/* Now OUTSIDE the media query */
+.history-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.history-btn:hover {
+  background-color: #666;
+}
 }

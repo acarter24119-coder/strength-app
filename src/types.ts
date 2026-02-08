@@ -6,6 +6,8 @@ export type SetLog = {
   id?: number;
 
   workout: WorkoutKey;
+  workoutId?: number;   // NEW — links sets to a finished workout
+
   exercise: string;
   type: ExerciseType;
 
